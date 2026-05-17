@@ -4,8 +4,19 @@ Reusable Codex skills managed as source, then installed into `~/.codex/skills`.
 
 ## Skills
 
+- `d2-diagram-harness`: YAML/JSON-source-driven D2 diagram pipelines.
+- `develop-web-game`: Web game development and Playwright testing loop.
+- `feishu-docx`: Feishu document export workflow through `feishu-docx`.
+- `feishu-export`: Chinese trigger alias for `飞书导出`, `导出飞书`, and `飞书知识包`.
+- `feishu-knowledge-export`: Feishu/Lark knowledge package exporter.
 - `feishu-markdown-publisher`: Markdown-first publishing workflow for long Feishu/Lark design documents.
 - `feishu-publish`: Chinese trigger alias for `/飞书发布` and `飞书发布`.
+- `noos-consume-handoff`: Consume NOOS handoffs.
+- `noos-hub-launcher`: Launch and inspect local NOOS Hub.
+- `noos-transfer-handoff`: Transfer NOOS handoffs.
+- `playwright`: Terminal Playwright workflow helper.
+- `progressive-knowledge-writing`: Progressive knowledge-pack writing workflow.
+- `vercel-deploy`: Vercel deployment workflow.
 
 ## Local Install
 
@@ -36,6 +47,8 @@ After this repository is pushed to GitHub, individual skills can be installed wi
 npx skills add <owner>/<repo> --skill feishu-markdown-publisher
 npx skills add <owner>/<repo> --skill feishu-publish
 ```
+
+Or install another skill by replacing the `--skill` value with one of the names above.
 
 The Chinese trigger phrase is:
 

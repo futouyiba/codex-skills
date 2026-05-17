@@ -1,0 +1,6 @@
+interface:
+  display_name: "Feishu Knowledge Export"
+  short_description: "Export Feishu docs into agent-readable knowledge packs."
+  default_prompt: "Use $feishu-knowledge-export to package this Feishu document for progressive agent reading."
+policy:
+  allow_implicit_invocation: true
