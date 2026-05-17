@@ -14,6 +14,13 @@ Reusable Codex skills managed as source, then installed into `~/.codex/skills`.
 ```
 
 The installer links each directory under `skills/` into `${CODEX_HOME:-$HOME/.codex}/skills`.
+If a skill already exists as a real directory on this machine, adopt the repository copy with:
+
+```bash
+./scripts/install.sh --replace-existing
+```
+
+Existing directories are moved aside with a `.bak-YYYYMMDDHHMMSS` suffix before links are created.
 
 ## Validate
 
