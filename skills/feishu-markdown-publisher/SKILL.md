@@ -62,20 +62,20 @@ Use this shape:
 ```markdown
 | 版本 | 内容 | 编辑人 | 时间 |
 | --- | --- | --- | --- |
-| V1.0 | 创建文档 | 斧头 | 20251223 |
-| v1.1 | 加入0.2.2数据表相关信息 | 斧头 | 20251229 |
-| v1.2 | 更新基本思路流程图 | 斧头 | 20260302 |
+| V1.0 | 创建文档 | 作者 | 20251223 |
+| v1.1 | 加入0.2.2数据表相关信息 | 作者 | 20251229 |
+| v1.2 | 更新基本思路流程图 | 作者 | 20260302 |
 ```
 
 Smart update rules:
 
-- If creating a new document with no prior revision history, insert `V1.0 / 创建文档 / 斧头 / <today as YYYYMMDD>`.
+- If creating a new document with no prior revision history, insert `V1.0 / 创建文档 / <editor> / <today as YYYYMMDD>`.
 - If revising an existing Markdown file that already has the table, append one row instead of rewriting history.
 - If revising a Feishu document that already has a similar opening table, preserve existing rows and append the next version row.
-- If the document has no revision table but the task is clearly an update to existing content, create the table with `V1.0 / 创建文档 / 斧头 / <unknown or inferred original date>` when the original date is available; otherwise use `V1.0 / 创建文档 / 斧头 / 待补充`, then append the current update row.
+- If the document has no revision table but the task is clearly an update to existing content, create the table with `V1.0 / 创建文档 / <editor> / <unknown or inferred original date>` when the original date is available; otherwise use `V1.0 / 创建文档 / <editor> / 待补充`, then append the current update row.
 - Increment minor versions by default: `V1.0 -> v1.1 -> v1.2`. Use a major version bump only when the user explicitly asks or the document is fundamentally rewritten.
 - Summarize the current change in `内容` with one concise Chinese phrase, such as `更新基本思路流程图`, `补充战斗数值说明`, or `加入0.2.2数据表相关信息`.
-- Default `编辑人` to `斧头` unless the user provides another editor.
+- Resolve `编辑人` in this order: user-provided editor name, existing table convention, `FEISHU_PUBLISH_EDITOR` environment variable, Git `user.name`, then `作者`. Use `待补充` only if the editor is truly unknown and a neutral placeholder is preferable.
 - Use the current local date in `YYYYMMDD` format for the new row unless the user provides a specific date.
 - Do not add a blank trailing row in Markdown. Feishu may visually show an empty row, but the Markdown source should stay clean.
 

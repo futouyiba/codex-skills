@@ -21,8 +21,9 @@ If a Feishu API capability is not available in the existing CLI wrapper, use the
 
 1. Check the opening revision table.
    - Confirm the document starts with a four-column table: `版本`, `内容`, `编辑人`, `时间`.
-   - For new documents, the first row should usually be `V1.0`, `创建文档`, `斧头`, and the current `YYYYMMDD` date.
+   - For new documents, the first row should usually be `V1.0`, `创建文档`, the resolved editor name, and the current `YYYYMMDD` date.
    - For updates, preserve prior rows and append the current update row with the next minor version.
+   - Resolve the editor name from the user request, existing table convention, `FEISHU_PUBLISH_EDITOR`, Git `user.name`, then `作者`.
    - If the Markdown table did not upload as a Feishu table, convert it into a native Feishu table during post-processing.
 
 2. Read the uploaded Feishu document and locate marker blocks.
