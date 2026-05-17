@@ -20,6 +20,26 @@ Rules:
 - Keep marker content valid Markdown where possible.
 - Do not nest custom markers unless the post-processing implementation explicitly supports it.
 
+## Opening Revision Table
+
+This is not a custom marker. Use a normal Markdown table at the top of Feishu-published design documents:
+
+```markdown
+| 版本 | 内容 | 编辑人 | 时间 |
+| --- | --- | --- | --- |
+| V1.0 | 创建文档 | 斧头 | 20251223 |
+| v1.1 | 加入0.2.2数据表相关信息 | 斧头 | 20251229 |
+| v1.2 | 更新基本思路流程图 | 斧头 | 20260302 |
+```
+
+Rules:
+
+- New document: start with `V1.0 / 创建文档 / 斧头 / <YYYYMMDD>`.
+- Existing document: append the next minor version row.
+- Use concise Chinese change descriptions.
+- Keep this as plain Markdown so it uploads to Feishu as a normal table.
+- Do not wrap the table in a marker block.
+
 ## Callout Blocks
 
 Use for content that should become Feishu highlight/callout blocks.

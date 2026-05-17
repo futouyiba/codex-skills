@@ -19,11 +19,17 @@ If a Feishu API capability is not available in the existing CLI wrapper, use the
 
 ## Conversion Pass
 
-1. Read the uploaded Feishu document and locate marker blocks.
+1. Check the opening revision table.
+   - Confirm the document starts with a four-column table: `版本`, `内容`, `编辑人`, `时间`.
+   - For new documents, the first row should usually be `V1.0`, `创建文档`, `斧头`, and the current `YYYYMMDD` date.
+   - For updates, preserve prior rows and append the current update row with the next minor version.
+   - If the Markdown table did not upload as a Feishu table, convert it into a native Feishu table during post-processing.
+
+2. Read the uploaded Feishu document and locate marker blocks.
    - Search for lines beginning with `:::callout`, `:::mermaid`, `:::decision`, `:::risk`, or `:::todo`.
    - Capture all content until the matching closing `:::`.
 
-2. Convert `:::mermaid` blocks.
+3. Convert `:::mermaid` blocks.
    - Extract the fenced Mermaid source.
    - Replace the imported marker/code-block region with a Feishu text drawing/Mermaid block when supported.
    - Insert the Mermaid source into the text drawing block as its diagram code.
@@ -32,18 +38,18 @@ If a Feishu API capability is not available in the existing CLI wrapper, use the
    - Do not leave the Mermaid source as a normal code block unless API support is unavailable.
    - If the API exposes a "show code" or "display source" property, disable it unless the user explicitly requests visible code.
 
-3. Convert callout-like blocks.
+4. Convert callout-like blocks.
    - `callout type="info|note"` -> neutral highlight/callout.
    - `callout type="success"` and `decision status="accepted"` -> success/conclusion highlight.
    - `callout type="warning"` and `risk level="medium|high"` -> warning highlight.
    - `callout type="danger"` and `risk level="critical"` -> danger highlight.
    - Preserve the title as the first line or block title, depending on Feishu capabilities.
 
-4. Convert TODO blocks.
+5. Convert TODO blocks.
    - Prefer a Feishu task/todo block if available and requested.
    - Otherwise convert to a visible callout labelled with owner and due date.
 
-5. Clean up.
+6. Clean up.
    - Remove opening and closing marker lines.
    - Remove redundant Markdown code fences around converted Mermaid diagrams.
    - Re-read the affected sections to verify block order and surrounding headings.
@@ -51,6 +57,7 @@ If a Feishu API capability is not available in the existing CLI wrapper, use the
 ## Verification Checklist
 
 - No raw custom marker lines remain in Feishu unless intentionally left as source text.
+- The opening revision table exists, preserves history, and includes the current publish/update row.
 - Mermaid diagrams render as text drawings/Mermaid blocks, not plain code blocks.
 - Mermaid text drawings are set to chart-only / diagram-only display unless the user requested source code visibility.
 - High-signal blocks are rendered as Feishu callouts/highlights.
