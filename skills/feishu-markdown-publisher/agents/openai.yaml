@@ -1,0 +1,4 @@
+interface:
+  display_name: "Feishu Markdown Publisher"
+  short_description: "Publish Markdown-first docs to Feishu rich docs"
+  default_prompt: "Use $feishu-markdown-publisher for /飞书发布: publish this Markdown design document to Feishu with rich formatting post-processing."
