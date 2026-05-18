@@ -19,13 +19,13 @@ Start with the configured knowledge library:
 ${KNOWLEDGE_LIBRARY_DIR:-./knowledge-library}/index.md
 ```
 
-Then read:
+Read only when the task needs imported Markdown routing:
 
 ```text
 ${KNOWLEDGE_LIBRARY_DIR:-./knowledge-library}/abstracts.md
 ```
 
-Use `abstracts.md` as the routing layer for imported Markdown: choose candidate documents from abstracts before opening long source files.
+Use `canon/*.md` as compact current conclusions when the topic matches. Use `abstracts.md` as the routing layer only before opening imported Markdown long source files.
 
 If the files are missing, search the current workspace for `knowledge-library/index.md`, `knowledge-library/abstracts.md`, and `feishu-knowledge-pack-*/manifest.json`.
 
@@ -37,26 +37,28 @@ If the files are missing, search the current workspace for `knowledge-library/in
    - If the user is editing an existing file, inspect relevant unstaged diffs before changing it.
    - Treat user edits as active design intent. Do not overwrite them casually.
 3. Read `knowledge-library/index.md` first, even if the user did not explicitly mention a pack.
-4. Read `knowledge-library/abstracts.md` before opening imported Markdown documents.
-5. Select only the knowledge packs and imported Markdown sources relevant to the task. State the selected sources briefly. If no source appears relevant, say that clearly before proceeding from general reasoning.
-6. For each selected pack:
+4. Prefer `knowledge-library/canon/*.md` when the index routes to a canon file; open imported Markdown only when the canon is insufficient.
+5. Read `knowledge-library/abstracts.md` only when opening imported Markdown documents is necessary.
+6. Select only the knowledge packs and imported Markdown sources relevant to the task. State the selected sources briefly. If no source appears relevant, say that clearly before proceeding from general reasoning.
+7. For each selected pack:
    - Read `manifest.json` first.
    - Read or re-read targeted sections of `doc.md`; use `rg` to locate topics before opening long spans.
    - Open table assets only for exact fields, formulas, values, or comparison.
    - Open images or whiteboards only for diagrams, visual relationships, arrows, labels, or layout.
    - Check `conversion-report.md` if resources appear missing or degraded.
-7. For each selected imported Markdown document:
+8. For each selected imported Markdown document:
+   - Respect status labels in `abstracts.md`: read `canonical` and `source` first; open `historical`, `derived`, `implementation`, or `metadata-only` files only when their status matches the task.
    - Use the abstract to explain why it was selected.
    - Use `rg` or section headings to open only relevant spans before reading the full file.
    - Re-read exact source sections before making strong claims, resolving conflicts, or writing final prose.
-8. Before drafting, perform a consistency pass:
+9. Before drafting, perform a consistency pass:
    - Existing commitments: claims, terms, assumptions, formulas, module relationships, player-stage logic, and design goals already present in the packs.
    - Conflicts: contradictions between the requested direction and existing packs, or between selected packs.
    - Gaps: missing definitions, missing causal links, unsupported claims, values that require table lookup, or diagrams that need inspection.
    - Open decisions: questions the user likely needs to decide before the document can be final.
-9. Produce the smallest useful writing step first: structure, thesis, section rewrite, conflict list, or patch.
-10. For edits, prefer modifying the Markdown/document directly when the user asks for implementation. Summarize changed files and source packs used.
-11. Keep a source note in substantial drafts, for example:
+10. Produce the smallest useful writing step first: structure, thesis, section rewrite, conflict list, or patch.
+11. For edits, prefer modifying the Markdown/document directly when the user asks for implementation. Summarize changed files and source packs used.
+12. Keep a source note in substantial drafts, for example:
    `Source packs: 搏金设计; 《钓鱼战斗切片》表格说明文档.`
 
 ## Interaction Pattern
@@ -76,7 +78,8 @@ Ask a question only when the target audience, document type, or edit target is g
 Use this policy instead of relying only on chat context:
 
 - Always read the library index at the start of a `/资料写作` task, unless the user explicitly says not to use the library.
-- Read `abstracts.md` before opening long imported Markdown sources.
+- Read matching `canon/*.md` summaries before long historical drafts.
+- Read `abstracts.md` only before opening long imported Markdown sources.
 - Read relevant pack manifests before making claims about what a pack contains.
 - Re-read source sections when making or revising important arguments, checking conflicts, using exact terminology, or writing final prose.
 - Re-open tables for exact values, fields, formulas, and comparisons even if a previous turn summarized them.
